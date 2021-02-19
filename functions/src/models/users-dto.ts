@@ -7,7 +7,8 @@ class UsersDTO {
         readonly name:string,
         readonly email:string,
         readonly password:string,
-        readonly company:UserCompanyEntity
+        readonly company:UserCompanyEntity,
+        readonly id?:string
     ) {}
 }
 
