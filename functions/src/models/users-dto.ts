@@ -1,13 +1,11 @@
-export class UserCompanyEntity {
-    constructor(readonly companyId:string, readonly companyName:string) {}
-}
+import {CompanyReferenceEntity} from "./reference-entity-types";
 
 class UsersDTO {
     constructor(
         readonly name:string,
         readonly email:string,
         readonly password:string,
-        readonly company:UserCompanyEntity,
+        readonly company:CompanyReferenceEntity,
         readonly id?:string
     ) {}
 }
