@@ -2,8 +2,7 @@ import {GenericObject} from "../types";
 
 interface IDalProvider {
     // Record<string, unknown> - replaces using an object {}
-    // This function will make use of the .set function in firebase
-    create (data:Record<string, unknown>):Promise<GenericObject>
+
     // This function will make use of .add function in firebase
     createWithAutoId (data:Record<string, unknown>):Promise<GenericObject>
 
