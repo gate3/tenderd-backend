@@ -19,10 +19,10 @@ class RequestStatusHistoryItem {
 }
 
 class RequestsDTO {
-    type!:RequestType;
+    type:RequestType = <RequestType>'';
     description = '';
-    asset!:RequestAsset;
-    status!:RequestStatus;
+    asset:RequestAsset = new RequestAsset();
+    status:RequestStatus = <RequestStatus>'';
     statusCreatedDate = '';
     statusCompletedDate = '';
 
@@ -30,10 +30,10 @@ class RequestsDTO {
     statusHistory:Array<RequestStatusHistoryItem> = [];
 
     @Type (() => CompanyReferenceEntity)
-    company!: CompanyReferenceEntity;
+    company: CompanyReferenceEntity = new CompanyReferenceEntity();
 
     @Type (() => UserReferenceEntity)
-    user!: UserReferenceEntity;
+    user: UserReferenceEntity = new UserReferenceEntity();
 
     createdDate = '';
     lastupdatedDate = '';

@@ -7,3 +7,4 @@ typings/
 
 node_modules/
 /.idea
+service-account.json
