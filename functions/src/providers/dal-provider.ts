@@ -4,8 +4,10 @@ import {GenericObject} from "../types";
 
 class DalProvider implements Partial<IDalProvider> {
 
+    private collectionName = '';
+
     // A reference to the typescript types can be found here https://firebase.google.com/docs/reference/admin/node/admin.firestore
-    constructor(private readonly database: admin.firestore.Firestore, private  collectionName:string) {}
+    constructor(private readonly database: admin.firestore.Firestore) {}
 
     setCollectionName (collectionName: string):void {
         this.collectionName = collectionName
