@@ -1,8 +1,9 @@
 import {GenericObject} from "../types";
+import UsersDTO from "../models/users-dto";
 
 interface IAuthProvider {
-    createUser (userData:GenericObject):GenericObject
-    loginUser (email:string, password:string):GenericObject
+    createUser (userData:UsersDTO):Promise<GenericObject>
+    loginUser (email:string, password:string):Promise<GenericObject>
 }
 
 export default IAuthProvider
