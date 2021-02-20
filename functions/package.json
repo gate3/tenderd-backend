@@ -15,10 +15,12 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "class-transformer": "^0.4.0",
     "express": "^4.17.1",
     "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0",
-    "firebase-functions": "^3.6.1"
+    "firebase-functions": "^3.6.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
