@@ -13,6 +13,11 @@ class DalProvider implements Partial<IDalProvider> {
         this.collectionName = collectionName
     }
 
+    async create(id: string, data: Record<string, unknown>): Promise<GenericObject> {
+        await this.database.collection(this.collectionName).doc(id).set(data)
+        return data
+    }
+
     async createWithAutoId(data: Record<string, unknown>): Promise<Record<string, unknown>> {
         const result = await this.database.collection(this.collectionName).add(data);
         const newEntityId = result.id;

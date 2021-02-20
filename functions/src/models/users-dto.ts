@@ -1,13 +1,12 @@
-import { Type } from 'class-transformer';
+import {Type} from 'class-transformer';
 import {CompanyReferenceEntity} from "./reference-entity-types";
 
 class UsersDTO {
-    id?:string;
     name = '';
     email = '';
-    password = '';
-    @Type (() => CompanyReferenceEntity)
-    company!:CompanyReferenceEntity;
+    @Type(() => CompanyReferenceEntity)
+    company: CompanyReferenceEntity = new CompanyReferenceEntity();
+    id?:string;
 }
 
 export default UsersDTO;
