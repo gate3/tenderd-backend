@@ -11,16 +11,16 @@ class AuthProvider implements IAuthProvider {
     // and here https://firebase.google.com/docs/reference/node/firebase.auth.Auth respectively
     constructor (private readonly authService:admin.auth.Auth, private readonly loginHelper:firebase.default.auth.Auth) {}
 
-    async createUser(userData: UsersDTO): Promise<GenericObject> {
-        const {email, password} = userData;
+    async createUser(userDto: UsersDTO): Promise<UsersDTO> {
+        const {email, password} = userDto;
 
-        const result = await this.authService.createUser({
+        const newUser = await this.authService.createUser({
             email,
             password
         });
-        return {
-            ...result
-        }
+        userDto.id = newUser.uid;
+
+        return userDto;
     }
 
     async loginUser(email: string, password: string): Promise<GenericObject> {

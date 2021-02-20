@@ -6,10 +6,12 @@
  *
  */
 export class CompanyReferenceEntity {
-    constructor(readonly companyId:string, readonly companyName:string) {}
+    companyId = '';
+    companyName = '';
 }
 
 // The user entity is similar to the company entity above
 export class UserReferenceEntity {
-    constructor(readonly userId:string, readonly name:string) {}
+    userId = '';
+    name = '';
 }

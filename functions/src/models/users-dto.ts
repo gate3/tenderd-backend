@@ -1,13 +1,13 @@
+import { Type } from 'class-transformer';
 import {CompanyReferenceEntity} from "./reference-entity-types";
 
 class UsersDTO {
-    constructor(
-        readonly name:string,
-        readonly email:string,
-        readonly password:string,
-        readonly company:CompanyReferenceEntity,
-        readonly id?:string
-    ) {}
+    id?:string;
+    name = '';
+    email = '';
+    password = '';
+    @Type (() => CompanyReferenceEntity)
+    company!:CompanyReferenceEntity;
 }
 
 export default UsersDTO;

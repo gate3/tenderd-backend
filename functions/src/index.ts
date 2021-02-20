@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import * as functions from 'firebase-functions';
 
 // // Start writing Firebase Functions

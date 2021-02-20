@@ -1,11 +1,9 @@
 import {UserReferenceEntity} from "./reference-entity-types";
 
 class CompanyDTO {
-    constructor(
-        readonly name:string,
-        readonly id?:string,
-        readonly users?:Array<UserReferenceEntity>
-    ) {}
+    id?:string;
+    name = '';
+    users:Array<UserReferenceEntity> = [];
 }
 
 export default CompanyDTO;
