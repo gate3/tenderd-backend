@@ -20,6 +20,10 @@ class UsersService {
 
         return classToPlain(userRecord)
     }
+
+    async loginUser (email:string, password:string):Promise<GenericObject> {
+        return this.authRepository.loginUser(email, password)
+    }
 }
 
 export default UsersService
