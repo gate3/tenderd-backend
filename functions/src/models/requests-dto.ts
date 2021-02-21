@@ -33,7 +33,7 @@ class RequestsDTO {
     company: CompanyReferenceEntity = new CompanyReferenceEntity();
 
     @Type (() => UserReferenceEntity)
-    user: UserReferenceEntity = new UserReferenceEntity();
+    assignedToUser: UserReferenceEntity = new UserReferenceEntity();
 
     createdDate = '';
     lastupdatedDate = '';

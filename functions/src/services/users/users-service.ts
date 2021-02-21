@@ -1,6 +1,6 @@
 import UserRepository from "../../models/repositories/user-repository";
 import {GenericObject} from "../../types";
-import UserValidator from './user-validtor';
+import UserValidator from './user-validator';
 import {classToPlain, plainToClass} from "class-transformer";
 import UsersDTO from "../../models/users-dto";
 import AuthRepository from "../../models/repositories/auth-repository";
