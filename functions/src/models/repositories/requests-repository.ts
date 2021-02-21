@@ -5,7 +5,7 @@ import {classToPlain, plainToClass} from "class-transformer";
 
 class RequestsRepository {
     constructor(private readonly dalProvider: IDalProvider) {
-        this.dalProvider.setCollectionName(COLLECTIONS.USERS)
+        this.dalProvider.setCollectionName(COLLECTIONS.REQUESTS)
     }
 
     async createRequest (requestsDTO: RequestsDTO):Promise<RequestsDTO> {
