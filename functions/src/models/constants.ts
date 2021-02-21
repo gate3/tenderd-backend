@@ -1,5 +1,6 @@
 export const COLLECTIONS = {
-    USERS: 'users'
+    USERS: 'users',
+    REQUESTS: 'requests',
 };
 
 export const ERROR_MESSAGES = {
