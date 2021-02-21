@@ -25,13 +25,13 @@ export default (requestsPayload:GenericObject) => {
     const schema = Joi.object({
         type: stringRequriedRule
             .error(invalidValueSuppliedError('type'))
-            .allow(Object.values(REQUESTS_TYPE)),
+            .allow(Object.values(REQUESTS_TYPE).join(',')),
 
         description: stringRequriedRule.error(invalidValueSuppliedError('description')),
-        assets: assetSchema,
+        asset: assetSchema,
         status: stringRequriedRule
             .error(invalidValueSuppliedError('status'))
-            .allow(Object.values(REQUESTS_STATUS)),
+            .allow(Object.values(REQUESTS_STATUS).join(',')),
         company: companySchema,
         assignedToUser: userSchema
     });
