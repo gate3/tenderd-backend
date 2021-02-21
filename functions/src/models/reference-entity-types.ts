@@ -12,6 +12,7 @@ export class CompanyReferenceEntity {
 
 // The user entity is similar to the company entity above
 export class UserReferenceEntity {
-    userId = '';
+    id = '';
     name = '';
+    reference:any;
 }

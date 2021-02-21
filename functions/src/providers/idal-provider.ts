@@ -10,9 +10,7 @@ interface IDalProvider {
 
     fetchAllWithQuery (queryableField:string, filter:string, query: string):Promise<Array<GenericObject>>
 
-    fetchAll (field:string):Promise<Array<GenericObject>>
-
-    fetchById (id:string, query:string):Promise<GenericObject|null>
+    fetchById (id:string):Promise<GenericObject|null>
 
     update (id:string, data:GenericObject):Promise<GenericObject>
 

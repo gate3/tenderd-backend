@@ -4,9 +4,9 @@ import {Type} from "class-transformer";
 class CompanyDTO {
     id?:string;
     name = '';
-
+    location = '';
     @Type (() => UserReferenceEntity)
-    users:Array<UserReferenceEntity> = [];
+    users:UserReferenceEntity = new UserReferenceEntity();
 }
 
 export default CompanyDTO;
