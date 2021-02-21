@@ -14,6 +14,13 @@ class CompanyService {
         // This conversion is because we don't want to return typescript class objects back to the client.
         return users.map(user => classToPlain(user))
     }
+
+    async fetchAllCompanies ():Promise<Array<GenericObject>> {
+        const companies = await this.companyRepository.fetchCompanies();
+        return companies.map(company => (
+            classToPlain(company)
+        ))
+    }
 }
 
 export default CompanyService
