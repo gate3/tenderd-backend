@@ -37,7 +37,7 @@ class DalProvider implements Partial<IDalProvider> {
      * @param filter - The filter operator can be ==, != or any logical operator
      * @param query - The value we wish to query for using the field above
      */
-    async fetchAll(queryableField:string, filter:string, query: string): Promise<Array<GenericObject>> {
+    async fetchAllWithQuery(queryableField:string, filter:string, query: string): Promise<Array<GenericObject>> {
         // @ts-ignore
         const snapshot = await this.database.collection(this.collectionName).where(queryableField, filter, query).get()
         if (snapshot.empty) {
@@ -51,6 +51,25 @@ class DalProvider implements Partial<IDalProvider> {
             })
         });
         return docs
+    }
+
+    /**
+     *
+     * @param field - The field arguement is a field in the document where we want to get all child nodes
+     */
+    async fetchAll (field:string):Promise<Array<GenericObject>> {
+        const snapshot = await this.database.collection(this.collectionName).doc(field).get()
+        if (!snapshot.exists) {
+            return []
+        }
+        const docs:Array<GenericObject> = [];
+
+        const result = snapshot.data();
+
+        if (result != null) {
+            result.forEach((doc: GenericObject) => docs.push(doc));
+        }
+        return docs;
     }
 
     async fetchById(id: string): Promise<GenericObject|null> {

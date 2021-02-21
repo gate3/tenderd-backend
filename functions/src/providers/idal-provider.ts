@@ -8,7 +8,9 @@ interface IDalProvider {
     // This function will make use of .add function in firebase
     createWithAutoId (data:Record<string, unknown>):Promise<GenericObject>
 
-    fetchAll (queryableField:string, filter:string, query: string):Promise<Array<GenericObject>>
+    fetchAllWithQuery (queryableField:string, filter:string, query: string):Promise<Array<GenericObject>>
+
+    fetchAll (field:string):Promise<Array<GenericObject>>
 
     fetchById (id:string, query:string):Promise<GenericObject|null>
 
