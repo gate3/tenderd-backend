@@ -5,6 +5,8 @@
  * fields that can be used initially before querying the entire company object.
  *
  */
+import {Exclude} from "class-transformer";
+
 export class CompanyReferenceEntity {
     companyId = '';
     companyName = '';
@@ -14,5 +16,6 @@ export class CompanyReferenceEntity {
 export class UserReferenceEntity {
     id = '';
     name = '';
+    @Exclude({ toPlainOnly: true })
     reference:any;
 }

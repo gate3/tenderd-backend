@@ -1,6 +1,8 @@
 import IDalProvider from "../../providers/idal-provider";
 import {COLLECTIONS} from "../constants";
 import {UserReferenceEntity} from "../reference-entity-types";
+import CompanyDTO from "../company-dto";
+import {plainToClass} from "class-transformer";
 
 class CompanyRepository {
     constructor(private readonly dalProvider: IDalProvider) {
@@ -24,6 +26,13 @@ class CompanyRepository {
             })
         }
         return []
+    }
+
+    async fetchCompanies ():Promise<Array<CompanyDTO>> {
+        const companyList = await this.dalProvider.fetchAll();
+        return companyList.map(company => (
+            plainToClass(CompanyDTO, company)
+        ))
     }
 }
 

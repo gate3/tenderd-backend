@@ -1,8 +1,9 @@
 import IDalProvider from "./idal-provider";
 import * as admin from 'firebase-admin';
 import {GenericObject} from "../types";
+import firebase from 'firebase';
 
-class DalProvider implements Partial<IDalProvider> {
+class DalProvider implements IDalProvider {
 
     private collectionName = '';
 
@@ -31,6 +32,25 @@ class DalProvider implements Partial<IDalProvider> {
         await this.database.collection(this.collectionName).doc(id).delete();
     }
 
+    private processResults (snapshot: firebase.firestore.DocumentData):Array<GenericObject> {
+        if (snapshot.empty) {
+            return []
+        }
+        const docs:Array<GenericObject> = [];
+        snapshot.forEach((doc: { id: any; data: () => Record<string, unknown>; }) => {
+            docs.push({
+                id: doc.id,
+                ...doc.data()
+            })
+        });
+        return docs
+    }
+
+    async fetchAll ():Promise<Array<GenericObject>> {
+        const snapshot = await this.database.collection(this.collectionName).get();
+        return this.processResults(snapshot)
+    }
+
     /**
      *
      * @param queryableField - This is a field we wish to query against e.g. email of a user
@@ -39,18 +59,8 @@ class DalProvider implements Partial<IDalProvider> {
      */
     async fetchAllWithQuery(queryableField:string, filter:string, query: string): Promise<Array<GenericObject>> {
         // @ts-ignore
-        const snapshot = await this.database.collection(this.collectionName).where(queryableField, filter, query).get()
-        if (snapshot.empty) {
-            return []
-        }
-        const docs:Array<GenericObject> = [];
-        snapshot.forEach(doc => {
-            docs.push({
-                id: doc.id,
-                ...doc.data()
-            })
-        });
-        return docs
+        const snapshot = await this.database.collection(this.collectionName).where(queryableField, filter, query).get();
+        return this.processResults(snapshot)
     }
 
     async fetchById(id: string): Promise<GenericObject|null> {
