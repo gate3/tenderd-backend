@@ -5,7 +5,9 @@ import UsersDTO from "../models/users-dto";
 import {GenericObject} from "../types";
 
 class AuthProvider implements IAuthProvider {
-
+    private errorMessages = {
+        USER_NOT_FOUND: 'User not found or information provided is incorrect.'
+    }
     // The api reference for the types used can be found
     // https://firebase.google.com/docs/reference/admin/node/admin.auth
     // and here https://firebase.google.com/docs/reference/node/firebase.auth.Auth respectively
@@ -24,10 +26,15 @@ class AuthProvider implements IAuthProvider {
     }
 
     async loginUser(email: string, password: string): Promise<GenericObject> {
-        const user = await this.loginHelper.signInWithEmailAndPassword(email, password);
-        return {
-            ...user
+        const {user} = await this.loginHelper.signInWithEmailAndPassword(email, password);
+        if (user) {
+            const token = await user.getIdToken();
+            // Returning the token as an object makes this function extensible, we could have returned a string
+            return {
+                token
+            }
         }
+        throw new Error(this.errorMessages.USER_NOT_FOUND)
     }
 
 }
