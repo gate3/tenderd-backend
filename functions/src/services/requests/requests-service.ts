@@ -20,6 +20,20 @@ class RequestsService {
         const newRequest = await this.requestsRepository.createRequest(requestDto);
         return classToPlain(newRequest);
     }
+
+    async fetchAllCompanyRequests (companyId:string):Promise<Array<GenericObject>> {
+        const requests = await this.requestsRepository.fetchRequestsByCompanyId(companyId)
+        return requests.map(request => (
+            classToPlain(request)
+        ))
+    }
+
+    async fetchAllUserRequests (userId:string):Promise<Array<GenericObject>> {
+        const requests = await this.requestsRepository.fetchRequestsByUserId(userId);
+        return requests.map(request => (
+            classToPlain(request)
+        ))
+    }
 }
 
 export default RequestsService;
