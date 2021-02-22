@@ -9,7 +9,7 @@ class RequestsRepository {
     }
 
     setCollectionName ():void {
-        this.dalProvider.setCollectionName(COLLECTIONS.USERS)
+        this.dalProvider.setCollectionName(COLLECTIONS.REQUESTS)
     }
 
     async createRequest (requestsDTO: RequestsDTO):Promise<RequestsDTO> {

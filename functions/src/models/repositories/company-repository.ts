@@ -8,7 +8,7 @@ class CompanyRepository {
     constructor(private readonly dalProvider: IDalProvider) {}
 
     setCollectionName ():void {
-        this.dalProvider.setCollectionName(COLLECTIONS.USERS)
+        this.dalProvider.setCollectionName(COLLECTIONS.COMPANIES)
     }
 
     async fetchUsers (companyId:string):Promise<Array<UserReferenceEntity>|null> {
@@ -36,9 +36,7 @@ class CompanyRepository {
         this.setCollectionName();
 
         const companyList = await this.dalProvider.fetchAll();
-        return companyList.map(company => (
-            plainToClass(CompanyDTO, company)
-        ))
+        return companyList.map(company => plainToClass(CompanyDTO, company))
     }
 }
 

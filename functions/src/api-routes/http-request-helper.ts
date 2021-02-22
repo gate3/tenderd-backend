@@ -12,12 +12,9 @@ export const successResponse = (
     responseObject: express.Response ,
     data = {},
     statusCode = StatusCodes.OK,
-) => {
-    const responseJsonData = {
-        ...data,
-    };
-    return responseObject.status(statusCode).json(responseJsonData);
-};
+) => (
+    responseObject.status(statusCode).json(data)
+);
 
 /**
  * @param {object} responseObject - The expressjs response object

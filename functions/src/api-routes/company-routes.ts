@@ -43,6 +43,6 @@ const fetchAllUsersByCompanyId = async (request:express.Request, response:expres
     }
 };
 
-api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.COMPANY_ID_PATH}`, fetchAllUsersByCompanyId);
+api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.COMPANY_ID_PATH}${COMPANIES.EMPLOYEES}`, fetchAllUsersByCompanyId);
 
 export default api
