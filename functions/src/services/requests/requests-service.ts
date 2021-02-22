@@ -16,6 +16,8 @@ class RequestsService {
         requestDto.createdDate = currentTimeStamp;
         requestDto.lastupdatedDate = currentTimeStamp;
         requestDto.statusCreatedDate = currentTimeStamp;
+        requestDto.companyId = requestPayload.company.companyId;
+        requestDto.assignedToUserId = requestPayload.assignedToUser.userId;
 
         const newRequest = await this.requestsRepository.createRequest(requestDto);
         return classToPlain(newRequest);
