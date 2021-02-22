@@ -2,16 +2,23 @@ import * as express from 'express';
 const api = express.Router();
 
 import {ROUTES} from "./constants";
-import {companyService} from "../di-container";
+import {companyService, requestsService} from "../di-container";
 import * as httpRequestHelper from "./http-request-helper";
 
 const {VERSIONS, COMPANIES} = ROUTES;
 
-const fetchAllRequest = (request:express.Request, response:express.Response):void => {
+const fetchAllCompanyRequest = async (request:express.Request, response:express.Response):Promise<express.Response> => {
+    try {
+        const companyId = request.params[COMPANIES.COMPANY_ID];
 
+        const result = await requestsService.fetchAllCompanyRequests(companyId);
+        return httpRequestHelper.successResponse(response, result)
+    }catch (e) {
+        return httpRequestHelper.errorResponse(response, e)
+    }
 };
 
-api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.REQUESTS}`, fetchAllRequest);
+api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.COMPANY_ID_PATH}${COMPANIES.REQUESTS}`, fetchAllCompanyRequest);
 
 
 const fetchAllCompanies = async (request:express.Request, response:express.Response):Promise<express.Response> => {
@@ -28,8 +35,7 @@ api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}`, fetchAllCompanies);
 
 const fetchAllUsersByCompanyId = async (request:express.Request, response:express.Response):Promise<express.Response> => {
     try {
-        const paramName = COMPANIES.COMPANY_ID.substr(1); // COMPANY_ID is :companyId , this will give us the rest of the string without :
-        const companyId = request.params[paramName];
+        const companyId = request.params[COMPANIES.COMPANY_ID];
         const result = await companyService.fetchAllUsers(companyId);
         return httpRequestHelper.successResponse(response, result)
     }catch (e) {
@@ -37,6 +43,6 @@ const fetchAllUsersByCompanyId = async (request:express.Request, response:expres
     }
 };
 
-api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.COMPANY_ID}`, fetchAllUsersByCompanyId);
+api.get(`${VERSIONS.V1}${COMPANIES.BASE_URL}${COMPANIES.COMPANY_ID_PATH}`, fetchAllUsersByCompanyId);
 
 export default api
