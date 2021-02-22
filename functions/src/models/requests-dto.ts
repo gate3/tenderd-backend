@@ -32,6 +32,9 @@ class RequestsDTO {
     @Type (() => RequestStatusHistoryItem)
     statusHistory:Array<RequestStatusHistoryItem> = [];
 
+    companyId:string = '';
+    assignedToUserId: string = '';
+
     @Type (() => CompanyReferenceEntity)
     company: CompanyReferenceEntity = new CompanyReferenceEntity();
 
