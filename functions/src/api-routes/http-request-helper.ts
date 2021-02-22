@@ -4,23 +4,19 @@ import CustomError from "../utilities/custom-error";
 
 /**
  * @param {object} responseObject - The expressjs response object
- * @param code - The error or success code, defaults to 0 for success
- * @param message - Any message to be passed along with response payload
+ * @param statusCode - The error or success code, defaults to 0 for success
  * @param {object} data - The data to be returned back as a response
  * @return response object
  */
 export const successResponse = (
     responseObject: express.Response ,
     data = {},
-    code = 0,
-    message = "Success"
+    statusCode = StatusCodes.OK,
 ) => {
     const responseJsonData = {
-        code,
-        msg: message,
         ...data,
     };
-    return responseObject.json(responseJsonData);
+    return responseObject.status(statusCode).json(responseJsonData);
 };
 
 /**
