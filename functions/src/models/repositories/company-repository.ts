@@ -5,11 +5,15 @@ import CompanyDTO from "../company-dto";
 import {plainToClass} from "class-transformer";
 
 class CompanyRepository {
-    constructor(private readonly dalProvider: IDalProvider) {
-        this.dalProvider.setCollectionName(COLLECTIONS.COMPANIES)
+    constructor(private readonly dalProvider: IDalProvider) {}
+
+    setCollectionName ():void {
+        this.dalProvider.setCollectionName(COLLECTIONS.USERS)
     }
 
     async fetchUsers (companyId:string):Promise<Array<UserReferenceEntity>|null> {
+        this.setCollectionName();
+
         const company = await this.dalProvider.fetchById(companyId);
         if (company == null) {
             return null
@@ -29,6 +33,8 @@ class CompanyRepository {
     }
 
     async fetchCompanies ():Promise<Array<CompanyDTO>> {
+        this.setCollectionName();
+
         const companyList = await this.dalProvider.fetchAll();
         return companyList.map(company => (
             plainToClass(CompanyDTO, company)

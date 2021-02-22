@@ -1,4 +1,5 @@
 import * as express from 'express';
+import {StatusCodes} from "http-status-codes";
 import * as httpRequestHelper from './http-request-helper';
 import {userService} from '../di-container';
 
@@ -11,7 +12,7 @@ const {VERSIONS, AUTH} = ROUTES;
 const createUser = async (request:express.Request, response:express.Response):Promise<express.Response> => {
     try {
         const result = await userService.createUser(request.body);
-        return httpRequestHelper.successResponse(response, result)
+        return httpRequestHelper.successResponse(response, result, StatusCodes.CREATED)
     }catch (e) {
         return httpRequestHelper.errorResponse(response, e)
     }

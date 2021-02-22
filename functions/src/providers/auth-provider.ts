@@ -31,6 +31,7 @@ class AuthProvider implements IAuthProvider {
             const token = await user.getIdToken();
             // Returning the token as an object makes this function extensible, we could have returned a string
             return {
+                userId: user.uid,
                 token
             }
         }

@@ -15,7 +15,7 @@ class DalProvider implements IDalProvider {
     }
 
     async create(id: string, data: Record<string, unknown>): Promise<GenericObject> {
-        await this.database.collection(this.collectionName).doc(id).set(data)
+        await this.database.collection(this.collectionName).doc(id).set(data);
         return data
     }
 

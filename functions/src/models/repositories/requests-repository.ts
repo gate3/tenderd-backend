@@ -8,13 +8,21 @@ class RequestsRepository {
         this.dalProvider.setCollectionName(COLLECTIONS.REQUESTS)
     }
 
+    setCollectionName ():void {
+        this.dalProvider.setCollectionName(COLLECTIONS.USERS)
+    }
+
     async createRequest (requestsDTO: RequestsDTO):Promise<RequestsDTO> {
+        this.setCollectionName();
+
         const requestsObject = classToPlain(requestsDTO);
         const newRequest = await this.dalProvider.createWithAutoId(requestsObject);
         return plainToClass(RequestsDTO, newRequest)
     }
 
     async fetchRequestsByCompanyId (companyId:string):Promise<Array<RequestsDTO>> {
+        this.setCollectionName();
+
         const requests = await this.dalProvider.fetchAllWithQuery(QUERYABLE_FIELDS.REQUESTS.COMPANY_ID, '==', companyId);
         return requests.map(request => (
             plainToClass(RequestsDTO, request)
@@ -22,6 +30,8 @@ class RequestsRepository {
     }
 
     async fetchRequestsByUserId (assignedToUserId:string):Promise<Array<RequestsDTO>> {
+        this.setCollectionName();
+
         const requests = await this.dalProvider.fetchAllWithQuery(QUERYABLE_FIELDS.REQUESTS.ASSIGNED_TO_USER, '==', assignedToUserId);
         return requests.map(request => (
             plainToClass(RequestsDTO, request)
